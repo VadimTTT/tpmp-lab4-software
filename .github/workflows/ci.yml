@@ -1,0 +1,17 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: |
+          echo "=== Тест 1: проверка helicopters ==="
+          sqlite3 aviation.db "SELECT COUNT(*) FROM helicopters;"
+          echo "=== Тест 2: проверка crew ==="
+          sqlite3 aviation.db "SELECT COUNT(*) FROM crew;"
+          echo "=== Тест 3: проверка flights ==="
+          sqlite3 aviation.db "SELECT COUNT(*) FROM flights;"
