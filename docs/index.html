@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Воздушный извозчик | Документация проекта</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f7fb;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    /* Шапка */
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 4px solid #3b82f6;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      opacity: 0.85;
+      max-width: 800px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #3b82f6;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-top: 0.75rem;
+    }
+
+    /* Контейнер */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    /* Боковое меню */
+    .sidebar {
+      width: 300px;
+      flex-shrink: 0;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .sidebar h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+      color: #0f172a;
+      border-left: 3px solid #3b82f6;
+      padding-left: 0.75rem;
+    }
+
+    .sidebar h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      margin-left: 0.5rem;
+    }
+
+    .sidebar li {
+      margin: 0.5rem 0;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #475569;
+      font-size: 0.9rem;
+      display: block;
+      padding: 0.25rem 0;
+      transition: color 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #3b82f6;
+    }
+
+    /* Основной контент */
+    .main-content {
+      flex: 1;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+    }
+
+    .main-content section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1rem;
+    }
+
+    .main-content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e2e8f0;
+      color: #0f172a;
+    }
+
+    .main-content h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: #1e293b;
+    }
+
+    .main-content h4 {
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+      color: #334155;
+    }
+
+    .main-content p {
+      margin-bottom: 1rem;
+      color: #334155;
+    }
+
+    .main-content ul, .main-content ol {
+      margin: 0.75rem 0 1rem 1.5rem;
+    }
+
+    .main-content li {
+      margin: 0.25rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+    }
+
+    code {
+      background: #f1f5f9;
+      padding: 0.2rem 0.4rem;
+      border-radius: 6px;
+      font-family: 'SF Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .card {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      border-left: 3px solid #3b82f6;
+    }
+
+    hr {
+      margin: 2rem 0;
+      border: 0;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .sidebar {
+        width: 100%;
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>✈️ Воздушный извозчик</h1>
+  <p>Система учёта грузовых вертолётов, экипажей и рейсов в высокогорном районе</p>
+  <div class="badge">Вариант 3 | Командный проект | КИС + SQLite</div>
+</div>
+
+<div class="container">
+  <!-- Боковая навигация (все разделы) -->
+  <div class="sidebar">
+    <h3>📘 Документация</h3>
+    <ul>
+      <li><a href="#overview">Обзор проекта</a></li>
+      <li><a href="#glossary">Глоссарий</a></li>
+      <li><a href="#functional">Функциональные требования</a></li>
+      <li><a href="#specification">Спецификация проекта (UML)</a></li>
+      <li><a href="#nonfunctional">Дополнительная спецификация</a></li>
+      <li><a href="#database">Схема базы данных</a></li>
+      <li><a href="#repository">Репозиторий проекта</a></li>
+      <li><a href="#individual">Индивидуальный проект (лаб.3)</a></li>
+      <li><a href="#usage">Использование</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <!-- ======================= ОСНОВНОЕ ======================= -->
+    <section id="overview">
+      <h2>📌 Project Name: Воздушный извозчик</h2>
+      <p><strong>Описание:</strong> Отряд грузовых вертолётов выполняет доставку грузов и людей в труднодоступном горном районе. Приложение ведёт учёт вертолётов, членов экипажа и выполненных рейсов. Для каждого рейса рассчитывается заработок экипажа (5% от обычного, 10% от спецрейса), контролируется остаток лётного ресурса. Доступ разграничен: командир авиаотряда управляет всеми данными, а члены экипажа могут просматривать информацию только о своём вертолёте и своих рейсах (*).</p>
+    </section>
+
+    <section id="glossary">
+      <h2>📖 Глоссарий</h2>
+      <table>
+        <thead><tr><th>Термин</th><th>Описание</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Вертолёт</td><td>Летательный аппарат, используемый для перевозки грузов и людей</td></tr>
+          <tr><td>Экипаж</td><td>Группа из трёх пилотов, постоянно закреплённых за одним вертолётом</td></tr>
+          <tr><td>Рейс</td><td>Полёт вертолёта по заданному маршруту</td></tr>
+          <tr><td>Обычный рейс</td><td>Стандартный рейс без особых условий</td></tr>
+          <tr><td>Спецрейс</td><td>Рейс с особыми условиями (повышенная опасность, срочность)</td></tr>
+          <tr><td>Капитальный ремонт</td><td>Полное восстановление вертолёта с обнулением/заменой ресурса</td></tr>
+          <tr><td>Лётный ресурс</td><td>Максимальное количество часов полёта до следующего капремонта</td></tr>
+          <tr><td>Налёт</td><td>Фактическое количество часов, наработанное вертолётом с момента последнего ремонта</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="functional">
+      <h2>🎯 Функциональные требования</h2>
+      <h3>Актёры</h3>
+      <ul>
+        <li><strong>Командир авиаотряда</strong> — полный доступ (CRUD, отчёты, статистика).</li>
+        <li><strong>Член экипажа</strong> — только просмотр своих данных и данных своего вертолёта (*).</li>
+      </ul>
+      <h3>Основные варианты использования</h3>
+      <ul>
+        <li>UC1: Управление вертолётами (CRUD)</li>
+        <li>UC2: Управление экипажем (CRUD)</li>
+        <li>UC3: Управление рейсами (CRUD + проверка ресурса)</li>
+        <li>UC4: Просмотр налёта и остатка ресурса по каждому вертолёту</li>
+        <li>UC5: Рейсы вертолёта за указанный период (с массой груза и числом пассажиров)</li>
+        <li>UC6: Статистика по спецрейсам (кол-во, масса груза, заработано денег)</li>
+        <li>UC7: Статистика по обычным рейсам</li>
+        <li>UC8: Вертолёт с максимальным количеством рейсов (с экипажем и заработком)</li>
+        <li>UC9: Экипаж с максимальным заработком (с перечнем рейсов)</li>
+        <li>UC10: Просмотр своих рейсов для члена экипажа (*)</li>
+      </ul>
+    </section>
+
+    <section id="specification">
+      <h2>📐 Спецификация проекта (UML)</h2>
+      <p>Диаграммы, разработанные в рамках проектирования:</p>
+      <ul>
+        <li><strong>Диаграмма вариантов использования</strong> – показаны выше</li>
+        <li><strong>Диаграмма классов</strong> – структура данных (Helicopter, Crew, Flight)</li>
+        <li><strong>Диаграммы деятельности</strong> – «Добавить рейс», «Расчёт зарплаты экипажа»</li>
+        <li><strong>Диаграммы последовательности</strong> – взаимодействие при расчёте и добавлении рейса</li>
+        <li><strong>Диаграмма компонентов</strong> – модель КИС (интерфейс, ядро, клиент, БД)</li>
+        <li><strong>Диаграмма развёртывания</strong> – размещение на GitHub + локальный запуск</li>
+      </ul>
+      <p>Все диаграммы представлены в Wiki репозитория (страницы с префиксом <code>Вариант-3-*</code>).</p>
+    </section>
+
+    <section id="nonfunctional">
+      <h2>⚙️ Дополнительная спецификация (нефункциональные требования)</h2>
+      <ul>
+        <li><strong>Надёжность</strong> – транзакции, проверка ресурса вертолёта, внешние ключи.</li>
+        <li><strong>Удобство использования</strong> – консольное меню с подсказками, понятные сообщения об ошибках.</li>
+        <li><strong>Производительность</strong> – индексы по внешним ключам, оптимизированные SELECT.</li>
+        <li><strong>Сопровождаемость</strong> – код разделён по модели КИС, комментарии, Makefile, CI.</li>
+        <li><strong>Безопасность</strong> – разграничение доступа командир / член экипажа (на уровне логики).</li>
+      </ul>
+    </section>
+
+    <section id="database">
+      <h2>🗄️ Схема базы данных (SQLite)</h2>
+      <p>Основные сущности: <code>helicopters</code>, <code>crew</code>, <code>flights</code>. Дополнительные таблицы: <code>salary_results</code>, <code>app_users</code>, <code>app_config</code>.</p>
+      <pre>
+CREATE TABLE helicopters (
+    helicopter_id INTEGER PRIMARY KEY,
+    serial_number TEXT UNIQUE,
+    model TEXT,
+    manufacture_date TEXT,
+    capacity REAL,
+    last_overhaul TEXT,
+    flight_resource INTEGER
+);
+
+CREATE TABLE crew (
+    crew_id INTEGER PRIMARY KEY,
+    personnel_number TEXT UNIQUE,
+    full_name TEXT,
+    position TEXT,
+    experience INTEGER,
+    address TEXT,
+    birth_year INTEGER,
+    helicopter_id INTEGER REFERENCES helicopters
+);
+
+CREATE TABLE flights (
+    flight_id INTEGER PRIMARY KEY,
+    flight_date TEXT,
+    helicopter_id INTEGER REFERENCES helicopters,
+    flight_code TEXT CHECK (flight_code IN ('обычный','спец')),
+    cargo_mass REAL,
+    passenger_count INTEGER,
+    duration INTEGER,
+    cost REAL
+);</pre>
+      <p>🔗 Полный SQL-скрипт: <a href="https://github.com/VadimTTT/tpmp-lab4-software/blob/dev/sql/aviation_schema.sql" target="_blank">aviation_schema.sql</a></p>
+    </section>
+
+    <section id="repository">
+      <hh2>📦 Репозиторий проекта (код + CI)</h2>
+      <p><strong>Второй репозиторий (код, сборка, тесты):</strong> <a href="https://github.com/VadimTTT/tpmp-lab4-software" target="_blank">https://github.com/VadimTTT/tpmp-lab4-software</a></p>
+      <p>Репозиторий содержит: исходный код (модель КИС), Makefile, GitHub Actions (CI), SQL-скрипты и тестовые данные.</p>
+    </section>
+
+    <section id="individual">
+      <h2>👤 Индивидуальный проект (лабораторная работа №3)</h2>
+      <p>В рамках предыдущей лабораторной работы был разработан проект для учёта программного обеспечения (вариант 22). Вся документация (постановка задачи, диаграммы классов, вариантов использования, деятельности, последовательности) размещена в той же Wiki репозитория <code>tpmp-gr12a-lab4-n-zar</code> на страницах с префиксом <strong>«Тюшко Вадим ...»</strong> и <strong>«Постановка задачи»</strong>.</p>
+    </section>
+
+    <section id="usage">
+      <h2>🛠️ Installation & Usage</h2>
+      <h3>Установка локально</h3>
+      <ol>
+        <li>Клонировать репозиторий: <code>git clone https://github.com/VadimTTT/tpmp-lab4-software.git</code></li>
+        <li>Перейти в папку проекта: <code>cd tpmp-lab4-software</code></li>
+        <li>Установить SQLite, GCC, make (если не установлены).</li>
+        <li>Выполнить сборку: <code>make</code></li>
+        <li>Запустить приложение: <code>make run</code></li>
+      </ol>
+      <h3>Использование</h3>
+      <p>После запуска открывается консольное меню, где командир может управлять вертолётами, экипажем и рейсами, а также просматривать аналитику (статистика, максимальные показатели). Члены экипажа при аутентификации видят только свой вертолёт и свои рейсы (* – будет реализовано на уровне запросов в финальной версии).</p>
+    </section>
+
+    <hr>
+    <div class="footer">
+      © 2025 Команда N@zAr | Тюшко Вадим (задачи 1–8) + второй участник (задачи 9–16) | CI/CD настроен через GitHub Actions
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
