@@ -128,3 +128,5 @@ INSERT INTO app_users (username, password_hash, role, crew_id) VALUES
 ('petrov', 'hash3', 'CREW', 2),
 ('sidorov', 'hash4', 'CREW', 3),
 ('smirnov', 'hash5', 'CREW', 4);
+
+ALTER TABLE helicopters ADD COLUMN photo_path TEXT;
