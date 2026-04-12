@@ -123,10 +123,10 @@ INSERT INTO flights (flight_date, helicopter_id, flight_code, cargo_mass, passen
 
 -- Пользователи приложения
 INSERT INTO app_users (username, password_hash, role, crew_id) VALUES
-('commander', 'hash1', 'COMMANDER', NULL),
-('ivanov', 'hash2', 'CREW', 1),
-('petrov', 'hash3', 'CREW', 2),
-('sidorov', 'hash4', 'CREW', 3),
-('smirnov', 'hash5', 'CREW', 4);
+('commander', 'commander', 'COMMANDER', NULL),
+('ivanov', 'ivanov', 'CREW', 1),
+('petrov', 'petrov', 'CREW', 2),
+('sidorov', 'sidorov', 'CREW', 3),
+('smirnov', 'smirnov', 'CREW', 4);
 
 ALTER TABLE helicopters ADD COLUMN photo_path TEXT;
